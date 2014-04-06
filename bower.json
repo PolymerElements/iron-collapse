@@ -1,5 +1,5 @@
 {
-  "name": "polymer-collapse",
+  "name": "core-collapse",
   "private": true,
   "dependencies": {
     "polymer": "Polymer/polymer#master"
