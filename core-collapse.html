@@ -221,7 +221,7 @@ will be collapsed.  Use `opened` to show/hide the content.
       if (!this.fixedSize) {
         this.updateSize('auto', null);
         var s = this.calcSize();
-        if (s == 0) {
+        if (s == '0px') {
           this.transitionEnd();
           return;
         }
