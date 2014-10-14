@@ -46,7 +46,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       });
       
       test('verify height', function(done) {
-        Platform.flush();
+        Polymer.flush();
         setTimeout(function() {
           collapseHeight = getCollapseComputedStyle().height;
           // verify height
@@ -57,7 +57,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       
       test('test opened: false', function(done) {
         collapse.opened = false;
-        Platform.flush();
+        Polymer.flush();
         setTimeout(function() {
           var h = getCollapseComputedStyle().height;
           // verify height is 0px
@@ -68,7 +68,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       
       test('test opened: true', function(done) {
         collapse.opened = true;
-        Platform.flush();
+        Polymer.flush();
         setTimeout(function() {
           var h = getCollapseComputedStyle().height;
           // verify height
