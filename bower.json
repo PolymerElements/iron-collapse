@@ -1,8 +1,15 @@
 {
   "name": "core-collapse",
+  "version": "0.8.0",
   "private": true,
+  "main": "core-collapse.html",
+  "authors": [
+    "Frankie Fu <ffu@google.com>",
+    "The Polymer Authors"
+  ],
+  "repository": "https://github.com/Polymer/core-collapse/tree/0.8-preview",
   "dependencies": {
-    "polymer": "Polymer/polymer#master"
+    "polymer": "Polymer/polymer#0.8-preview"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^1.1.0"
