@@ -11,7 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <html>
 <head>
 
-  <title>core-collapse-basic</title>
+  <title>core-collapse-horizontal</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -23,7 +23,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </head>
 <body>
 
-  <core-collapse id="collapse" opened>
+  <core-collapse id="collapse" opened horizontal>
     <div>
     Forma temperiemque cornua sidera dissociata cornua recessit innabilis ligavit: solidumque coeptis nullus caelum sponte phoebe di regat mentisque tanta austro capacius amphitrite sui quin postquam semina fossae liquidum umor galeae coeptis caligine liberioris quin liquidum matutinis invasit posset: flexi glomeravit radiis certis invasit oppida postquam onerosior inclusum dominari opifex terris pace finxit quam aquae nunc sine altae auroram quam habentem homo totidemque scythiam in pondus ensis tegit caecoque poena lapidosos humanas coeperunt poena aetas totidem nec natura aethera locavit caelumque distinxit animalibus phoebe cingebant moderantum porrexerat terrae possedit sua sole diu summaque obliquis melioris orbem
     </div>
@@ -39,19 +39,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     var collapse = document.querySelector('#collapse');
 
     var delay = 500;
-    var collapseHeight;
+    var width;
 
-    suite('basic', function() {
+    suite('horizontal', function() {
 
       test('verify attribute', function() {
         assert.equal(collapse.opened, true);
       });
 
-      test('verify height', function(done) {
+      test('verify width', function(done) {
         setTimeout(function() {
-          collapseHeight = getCollapseComputedStyle().height;
-          // verify height
-          assert.notEqual(collapseHeight, '0px');
+          width = getCollapseComputedStyle().width;
+          // verify width
+          assert.notEqual(width, '0px');
           done();
         }, delay);
       });
@@ -59,8 +59,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       test('test opened: false', function(done) {
         collapse.opened = false;
         setTimeout(function() {
-          var h = getCollapseComputedStyle().height;
-          // verify height is 0px
+          var h = getCollapseComputedStyle().width;
+          // verify width is 0px
           assert.equal(h, '0px');
           done();
         }, delay);
@@ -69,9 +69,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       test('test opened: true', function(done) {
         collapse.opened = true;
         setTimeout(function() {
-          var h = getCollapseComputedStyle().height;
-          // verify height
-          assert.equal(h, collapseHeight);
+          var h = getCollapseComputedStyle().width;
+          // verify width
+          assert.equal(h, width);
           done();
         }, delay);
       });
