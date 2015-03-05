@@ -17,59 +17,68 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../test-fixture/test-fixture-mocha.js"></script>
 
+  <link rel="import" href="../../test-fixture/test-fixture.html">
   <link rel="import" href="../core-collapse.html">
 
 </head>
 <body>
 
-  <core-collapse id="collapse" opened>
-    <div>
-    Forma temperiemque cornua sidera dissociata cornua recessit innabilis ligavit: solidumque coeptis nullus caelum sponte phoebe di regat mentisque tanta austro capacius amphitrite sui quin postquam semina fossae liquidum umor galeae coeptis caligine liberioris quin liquidum matutinis invasit posset: flexi glomeravit radiis certis invasit oppida postquam onerosior inclusum dominari opifex terris pace finxit quam aquae nunc sine altae auroram quam habentem homo totidemque scythiam in pondus ensis tegit caecoque poena lapidosos humanas coeperunt poena aetas totidem nec natura aethera locavit caelumque distinxit animalibus phoebe cingebant moderantum porrexerat terrae possedit sua sole diu summaque obliquis melioris orbem
-    </div>
-  </core-collapse>
+  <test-fixture id="test">
+    <template>
+      <core-collapse id="collapse" opened>
+        <div>
+          Forma temperiemque cornua sidera dissociata cornua recessit innabilis ligavit: solidumque coeptis nullus caelum sponte phoebe di regat mentisque tanta austro capacius amphitrite sui quin postquam semina fossae liquidum umor galeae coeptis caligine liberioris quin liquidum matutinis invasit posset: flexi glomeravit radiis certis invasit oppida postquam onerosior inclusum dominari opifex terris pace finxit quam aquae nunc sine altae auroram quam habentem homo totidemque scythiam in pondus ensis tegit caecoque poena lapidosos humanas coeperunt poena aetas totidem nec natura aethera locavit caelumque distinxit animalibus phoebe cingebant moderantum porrexerat terrae possedit sua sole diu summaque obliquis melioris orbem
+        </div>
+      </core-collapse>
+    </template>
+  </test-fixture>
 
   <script>
 
-    function getCollapseComputedStyle() {
-      var c = document.querySelector('#collapse');
-      return getComputedStyle(c);
-    }
-
-    var collapse = document.querySelector('#collapse');
-
-    var delay = 500;
-    var collapseHeight;
-
     suite('basic', function() {
 
-      test('verify attribute', function() {
+      var collapse;
+      var delay = 500;
+      var collapseHeight;
+
+      setup(function () {
+        collapse = fixture('test');
+      });
+
+      test('opened attribute', function() {
         assert.equal(collapse.opened, true);
       });
 
-      test('verify height', function(done) {
+      test('horizontal attribute', function() {
+        assert.equal(collapse.horizontal, false);
+      });
+
+      test('default opened height', function(done) {
         setTimeout(function() {
-          collapseHeight = getCollapseComputedStyle().height;
-          // verify height
+          // store height
+          collapseHeight = getComputedStyle(collapse).height;
+          // verify height not 0px
           assert.notEqual(collapseHeight, '0px');
           done();
         }, delay);
       });
 
-      test('test opened: false', function(done) {
+      test('set opened to false', function(done) {
         collapse.opened = false;
         setTimeout(function() {
-          var h = getCollapseComputedStyle().height;
+          var h = getComputedStyle(collapse).height;
           // verify height is 0px
           assert.equal(h, '0px');
           done();
         }, delay);
       });
 
-      test('test opened: true', function(done) {
+      test('set opened to true', function(done) {
         collapse.opened = true;
         setTimeout(function() {
-          var h = getCollapseComputedStyle().height;
+          var h = getComputedStyle(collapse).height;
           // verify height
           assert.equal(h, collapseHeight);
           done();

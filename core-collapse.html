@@ -73,7 +73,8 @@ and instead put a div inside and style that.
 
     is: 'core-collapse',
 
-    published: {
+    properties: {
+
       /**
        * If true, the orientation is horizontal; otherwise is vertical.
        *
@@ -81,7 +82,11 @@ and instead put a div inside and style that.
        * @type Boolean
        * @default false
        */
-      horizontal: Boolean,
+      horizontal: {
+        type: Boolean,
+        value: false,
+        observer: 'horizontalChanged'
+      },
 
       /**
        * Set opened to true to show the collapse element and to false to hide it.
@@ -90,16 +95,22 @@ and instead put a div inside and style that.
        * @type Boolean
        * @default false
        */
-      opened: Boolean
-    },
+      opened: {
+        type: Boolean,
+        value: false,
+        observer: 'openedChanged'
+      }
 
-    bind: {
-      horizontal: 'horizontalChanged',
-      opened: 'openedChanged'
     },
 
     listeners: {
       transitionend: 'transitionEnd'
+    },
+
+    ready: function() {
+      // Avoid transition at the beginning e.g. page loads and enable
+      // transitions only after the element is rendered and ready.
+      this._enableTransition = true;
     },
 
     horizontalChanged: function() {
@@ -153,7 +164,7 @@ and instead put a div inside and style that.
     },
 
     enableTransition: function(enabled) {
-      this.style.transitionDuration = enabled ? '' : '0';
+      this.style.transitionDuration = (enabled && this._enableTransition) ? '' : '0s';
     },
 
     transitionEnd: function() {
