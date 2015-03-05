@@ -50,20 +50,26 @@ and instead put a div inside and style that.
 
   <style>
 
-    core-collapse {
+    :host {
       display: block;
       transition-duration: 300ms;
     }
 
-    core-collapse.core-collapse-closed {
+    :host(.core-collapse-closed) {
       display: none;
     }
 
-    core-collapse:not(.core-collapse-opened) {
+    :host(:not(.core-collapse-opened)) {
       overflow: hidden;
     }
 
   </style>
+
+  <template>
+
+    <content></content>
+
+  </template>
 
 </dom-module>
 
