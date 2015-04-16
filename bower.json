@@ -1,19 +1,32 @@
 {
-  "name": "core-collapse",
+  "name": "iron-collapse",
   "version": "0.8.0",
-  "private": true,
-  "main": "core-collapse.html",
   "authors": [
-    "Frankie Fu <ffu@google.com>",
     "The Polymer Authors"
   ],
-  "repository": "https://github.com/Polymer/core-collapse/tree/0.8-preview",
+  "keywords": [
+    "web-components",
+    "web-component",
+    "polymer"
+  ],
+  "main": "index.html",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PolymerElements/iron-collapse"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/PolymerElements/iron-collapse",
+  "ignore": [
+  ],
   "dependencies": {
-    "polymer": "Polymer/polymer#0.8-preview"
+    "polymer": "Polymer/polymer#v0.8.0-rc.4"
   },
   "devDependencies": {
-    "webcomponentsjs": "webcomponents/webcomponentsjs#master",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#~0.6.1",
     "web-component-tester": "Polymer/web-component-tester#^2.2.3",
-    "test-fixture": "Polymer/test-fixture#master"
+    "test-fixture": "PolymerElements/test-fixture#^0.8.0",
+    "iron-doc-viewer": "PolymerElements/iron-doc-viewer#^v0.8.0",
+    "paper-styles": "PolymerElements/paper-styles#^0.8.0"
   }
 }
