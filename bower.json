@@ -1,6 +1,7 @@
 {
   "name": "iron-collapse",
   "version": "0.9.0",
+  "description": "Provides a collapsable container",
   "authors": [
     "The Polymer Authors"
   ],
@@ -17,10 +18,10 @@
   },
   "license": "MIT",
   "homepage": "https://github.com/PolymerElements/iron-collapse",
-  "ignore": [
-  ],
+  "ignore": [],
   "dependencies": {
-    "polymer": "Polymer/polymer#v0.9.0-rc.1"
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
+    "polymer": "Polymer/polymer#^0.9.0"
   },
   "devDependencies": {
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.6.0",
