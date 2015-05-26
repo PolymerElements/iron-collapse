@@ -43,7 +43,8 @@ and instead put a div inside and style that.
       </div>
     </iron-collapse>
 
-@group Polymer Core Elements
+@group Iron Elements
+@hero hero.svg
 @element iron-collapse
 -->
 
@@ -163,7 +164,7 @@ and instead put a div inside and style that.
     enableTransition: function(enabled) {
       this.style.transitionDuration = (enabled && this._enableTransition) ? '' : '0s';
     },
-    
+
     _horizontalChanged: function() {
       this.dimension = this.horizontal ? 'width' : 'height';
       this.style.transitionProperty = this.dimension;

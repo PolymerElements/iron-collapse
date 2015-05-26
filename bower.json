@@ -7,8 +7,8 @@
   ],
   "keywords": [
     "web-components",
-    "web-component",
-    "polymer"
+    "polymer",
+    "container"
   ],
   "main": "index.html",
   "private": true,
