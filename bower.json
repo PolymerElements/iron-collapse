@@ -16,7 +16,7 @@
     "type": "git",
     "url": "https://github.com/PolymerElements/iron-collapse"
   },
-  "license": "MIT",
+  "license": "http://polymer.github.io/LICENSE.txt",
   "homepage": "https://github.com/PolymerElements/iron-collapse",
   "ignore": [],
   "dependencies": {
