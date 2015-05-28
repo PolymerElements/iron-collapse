@@ -10,7 +10,6 @@
     "polymer",
     "container"
   ],
-  "main": "index.html",
   "private": true,
   "repository": {
     "type": "git",
