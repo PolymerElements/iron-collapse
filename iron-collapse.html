@@ -82,6 +82,13 @@ and instead put a div inside and style that.
 
     is: 'iron-collapse',
 
+    /**
+     * Fired when the target element has been resized as a result of the opened
+     * state changing.
+     *
+     * @event iron-collapse-resize
+     */
+
     properties: {
 
       /**
@@ -184,6 +191,8 @@ and instead put a div inside and style that.
       this.toggleClass('iron-collapse-closed', !this.opened);
       this.toggleClass('iron-collapse-opened', this.opened);
       this.enableTransition(false);
+
+      this.fire('iron-collapse-resize', this.opened);
     },
 
     _calcSize: function() {
