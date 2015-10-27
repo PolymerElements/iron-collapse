@@ -27,5 +27,6 @@
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
     "paper-styles": "PolymerElements/paper-styles#^1.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
-  }
+  },
+  "main": "iron-collapse.html"
 }
