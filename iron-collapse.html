@@ -134,11 +134,11 @@ and instead put a div inside and style that.
     },
 
     show: function() {
-      this.opened = true;    
+      this.opened = true;
     },
 
     hide: function() {
-      this.opened = false;    
+      this.opened = false;
     },
 
     updateSize: function(size, animated) {
@@ -146,7 +146,7 @@ and instead put a div inside and style that.
       var s = this.style;
       var nochange = s[this.dimension] === size;
       s[this.dimension] = size;
-      if (animated && nochange) {
+      if (animated && (nochange || !this._enableTransition)) {
         this._transitionEnd();
       }
     },
@@ -197,8 +197,7 @@ and instead put a div inside and style that.
 
     _calcSize: function() {
       return this.getBoundingClientRect()[this.dimension] + 'px';
-    },
-
+    }
 
   });
 
