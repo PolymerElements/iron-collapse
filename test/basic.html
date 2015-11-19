@@ -51,6 +51,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           assert.equal(collapse.opened, true);
         });
 
+        test('animated by default', function() {
+          assert.isTrue(!collapse.noAnimation, '`noAnimation` is falsy');
+        });
+
         test('horizontal attribute', function() {
           assert.equal(collapse.horizontal, false);
         });
@@ -61,34 +65,43 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         test('set opened to false triggers animation', function(done) {
           collapse.opened = false;
-          // animation got enabled
+          // Animation got enabled.
           assert.notEqual(collapse.style.transitionDuration, '0s');
           collapse.addEventListener('transitionend', function() {
-            // animation disabled
+            // Animation disabled.
             assert.equal(collapse.style.transitionDuration, '0s');
             done();
           });
+        });
+
+        test('enableTransition(false) disables animations', function() {
+          collapse.enableTransition(false);
+          assert.isTrue(collapse.noAnimation, '`noAnimation` is true');
+          // trying to animate the size update
+          collapse.updateSize('0px', true);
+          // Animation immediately disabled.
+          assert.equal(collapse.style.height, '0px');
         });
 
         test('set opened to false, then to true', function(done) {
           // this listener will be triggered twice (every time `opened` changes)
           collapse.addEventListener('transitionend', function() {
             if (collapse.opened) {
-              // check finalSize after animation is done
+              // Check finalSize after animation is done.
               assert.equal(collapse.style.height, 'auto');
               done();
             } else {
-              // check if size is still 0px
+              // Check if size is still 0px.
               assert.equal(collapse.style.height, '0px');
-              // trigger 2nd toggle
+              // Trigger 2nd toggle.
               collapse.opened = true;
-              // size should be immediately set
+              // Size should be immediately set.
               assert.equal(collapse.style.height, collapseHeight);
             }
           });
-          // trigger 1st toggle
+          // Trigger 1st toggle.
           collapse.opened = false;
-          // size should be immediately set
+          // Size should be immediately set.
           assert.equal(collapse.style.height, '0px');
         });
 
