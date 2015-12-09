@@ -166,8 +166,9 @@ and instead put a div inside and style that.
         }
         // Go to startSize without animation.
         this.style[this.dimension] = startSize;
-        // Force layout to ensure transition will go.
-        /** @suppress {suspiciousCode} */ this.offsetHeight;
+        // Force layout to ensure transition will go. Set offsetHeight to itself
+        // so that compilers won't remove it.
+        this.offsetHeight = this.offsetHeight;
         // Enable animation.
         this._updateTransition(true);
       }
