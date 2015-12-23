@@ -114,6 +114,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           assert.isTrue(spy.calledOnce, 'iron-resize was fired');
         });
 
+        test('overflow is hidden while animating', function(done) {
+          collapse.addEventListener('transitionend', function() {
+            // Should still be hidden.
+            assert.equal(getComputedStyle(collapse).overflow, 'hidden');
+            done();
+          });
+          assert.equal(getComputedStyle(collapse).overflow, 'visible');
+          collapse.opened = false;
+          // Immediately updated style.
+          assert.equal(getComputedStyle(collapse).overflow, 'hidden');
+        });
+
       });
 
     </script>
