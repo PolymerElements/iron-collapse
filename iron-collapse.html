@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
 
 <!--
 `iron-collapse` creates a collapsible block of content.  By default, the content
@@ -78,6 +79,10 @@ and instead put a div inside and style that.
   Polymer({
 
     is: 'iron-collapse',
+
+    behaviors: [
+      Polymer.IronResizableBehavior
+    ],
 
     properties: {
 
@@ -221,6 +226,7 @@ and instead put a div inside and style that.
       this.toggleClass('iron-collapse-closed', !this.opened);
       this.toggleClass('iron-collapse-opened', this.opened);
       this._updateTransition(false);
+      this.notifyResize();
     },
 
     _calcSize: function() {
