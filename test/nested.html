@@ -62,42 +62,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             assert.equal(innerCollapse.style.height, '0px');
           });
 
-          test('set inner opened to true updates inner style height without animation', function() {
+          test('open inner collapse updates size without animation', function() {
             innerCollapse.opened = true;
 
-            // Animation disabled and height expanded
+            // Animation disabled
             assert.equal(innerCollapse.style.transitionDuration, '0s');
-            assert.equal(innerCollapse.style.height, 'auto');
           });
 
-        });
-
-        suite('opened outer collapse', function() {
-
-          setup(function () {
-            outerCollapse.opened = true;
-          });
-
-          test('inner collapse default opened attribute', function() {
-            assert.equal(innerCollapse.opened, false);
-          });
-
-          test('inner collapse default style height', function() {
-            assert.equal(innerCollapse.style.height, '0px');
-          });
-
-          test('set inner opened to true triggers height animation', function() {
+          test('open inner collapse then open outer collapse reveals expanded inner collapse', function() {
             innerCollapse.opened = true;
+            outerCollapse.opened = true;
 
-            // Animation got enabled and target height set
-            assert.notEqual(innerCollapse.style.transitionDuration, '0s');
-            assert.equal(innerCollapse.style.height, '100px');
-
-            innerCollapse.addEventListener('transitionend', function() {
-              // Animation disabled.
-              assert.equal(innerCollapse.style.transitionDuration, '0s');
-              done();
-            });
+            assert.equal(innerCollapse.getBoundingClientRect().height, 100);
           });
 
         });
