@@ -168,7 +168,7 @@ and instead put a div inside and style that.
 
       this._updateTransition(false);
       // If we can animate, must do some prep work.
-      if (animated && !this.noAnimation && this._isVisible()) {
+      if (animated && !this.noAnimation && this._isDisplayed) {
         // Animation will start at the current size.
         var startSize = this._calcSize();
         // For `auto` we must calculate what is the final size for the animation.
@@ -239,7 +239,12 @@ and instead put a div inside and style that.
       this.notifyResize();
     },
 
-    _isVisible: function() {
+    /**
+     * Simplistic heuristic to detect if element has a parent with display: none
+     *
+     * @private
+     */
+    get _isDisplayed() {
       var rect = this.getBoundingClientRect();
       for (prop in rect) {
         if (rect[prop] !== 0) return true;
