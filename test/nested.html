@@ -31,8 +31,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             Lorem ipsum
           </div>
 
-          <iron-collapse id="inner-collapse">
+          <iron-collapse id="inner-collapse-vertical">
             <div style="height:100px;">
+              consectetur adipiscing elit
+            </div>
+          </iron-collapse>
+
+          <iron-collapse id="inner-collapse-horizontal" horizontal style="display: inline-block">
+            <div style="width:100px;">
               consectetur adipiscing elit
             </div>
           </iron-collapse>
@@ -49,10 +55,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         setup(function () {
           outerCollapse = fixture('test');
-          innerCollapse = outerCollapse.querySelector('#inner-collapse');
         });
 
-        suite('closed outer collapse', function() {
+        suite('vertical', function() {
+
+          setup(function () {
+            innerCollapse = outerCollapse.querySelector('#inner-collapse-vertical');
+          });
 
           test('inner collapse default opened attribute', function() {
             assert.equal(innerCollapse.opened, false);
@@ -69,11 +78,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             assert.equal(innerCollapse.style.transitionDuration, '0s');
           });
 
-          test('open inner collapse then open outer collapse reveals expanded inner collapse', function() {
+          test('open inner collapse then open outer collapse reveals inner collapse with expanded height', function() {
             innerCollapse.opened = true;
             outerCollapse.opened = true;
 
             assert.equal(innerCollapse.getBoundingClientRect().height, 100);
+          });
+
+        });
+
+        suite('horizontal', function() {
+
+          setup(function () {
+            innerCollapse = outerCollapse.querySelector('#inner-collapse-horizontal');
+          });
+
+          test('inner collapse default style width', function() {
+            assert.equal(innerCollapse.style.width, '0px');
+          });
+
+          test('open inner collapse updates size without animation', function() {
+            innerCollapse.opened = true;
+
+            // Animation disabled
+            assert.equal(innerCollapse.style.transitionDuration, '0s');
+          });
+
+          test('open inner collapse then open outer collapse reveals inner collapse with expanded width', function() {
+            innerCollapse.opened = true;
+            outerCollapse.opened = true;
+
+            assert.equal(innerCollapse.getBoundingClientRect().width, 100);
           });
 
         });
