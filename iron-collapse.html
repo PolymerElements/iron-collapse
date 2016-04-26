@@ -27,7 +27,7 @@ will be collapsed.  Use `opened` or `toggle()` to show/hide the content.
       this.$.collapse.toggle();
     }
 
-`iron-collapse` adjusts the height/width of the collapsible element to show/hide
+`iron-collapse` adjusts the max-height/max-width of the collapsible element to show/hide
 the content.  So avoid putting padding/margin/border on the collapsible directly,
 and instead put a div inside and style that.
 
@@ -43,8 +43,6 @@ and instead put a div inside and style that.
         <div>Content goes here...</div>
       </div>
     </iron-collapse>
-
-TODO Doku anpassen
 
 @group Iron Elements
 @hero hero.svg
@@ -130,8 +128,12 @@ TODO Doku anpassen
        return this.horizontal ? 'width' : 'height';
     },
 
-    get dimensionStyleProperty() {
+    get dimensionMax() {
        return this.horizontal ? 'maxWidth' : 'maxHeight';
+    },
+
+    get dimensionMaxCss() {
+       return this.horizontal ? 'max-width' : 'max-height';
     },
 
     hostAttributes: {
@@ -168,7 +170,7 @@ TODO Doku anpassen
 
     updateSize: function(size, animated) {
       // No change!
-      if (this.style[this.dimensionStyleProperty] === size) {
+      if (this.style[this.dimensionMax] === size) {
         return;
       }
 
@@ -180,11 +182,11 @@ TODO Doku anpassen
         // For `auto` we must calculate what is the final size for the animation.
         // After the transition is done, _transitionEnd will set the size back to `auto`.
         if (size === 'auto') {
-          this.style[this.dimensionStyleProperty] = '';
+          this.style[this.dimensionMax] = '';
           size = this._calcSize();
         }
         // Go to startSize without animation.
-        this.style[this.dimensionStyleProperty] = startSize;
+        this.style[this.dimensionMax] = startSize;
         // Force layout to ensure transition will go. Set offsetHeight to itself
         // so that compilers won't remove it.
         this.offsetHeight = this.offsetHeight;
@@ -193,9 +195,9 @@ TODO Doku anpassen
       }
       // Set the final size.
       if (size === 'auto') {
-          this.style[this.dimensionStyleProperty] = '';
+          this.style[this.dimensionMax] = '';
       } else {
-        this.style[this.dimensionStyleProperty] = size;
+        this.style[this.dimensionMax] = size;
       }
     },
 
@@ -216,8 +218,8 @@ TODO Doku anpassen
     },
 
     _horizontalChanged: function() {
-      this.style.transitionProperty = "max-" + this.dimension;
-      var otherDimension = this.dimension === 'width' ? 'maxHeight' : 'maxWidth';
+      this.style.transitionProperty = this.dimensionMaxCss;
+      var otherDimension = this.dimensionMax === 'maxWidth' ? 'maxHeight' : 'maxWidth';
       this.style[otherDimension] = '';
       this.updateSize(this.opened ? 'auto' : '0px', false);
     },
@@ -241,7 +243,7 @@ TODO Doku anpassen
 
     _transitionEnd: function() {
       if (this.opened) {
-        this.style[this.dimensionStyleProperty] = '';
+        this.style[this.dimensionMax] = '';
       }
       this.toggleClass('iron-collapse-closed', !this.opened);
       this.toggleClass('iron-collapse-opened', this.opened);
