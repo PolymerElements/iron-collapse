@@ -44,6 +44,8 @@ and instead put a div inside and style that.
       </div>
     </iron-collapse>
 
+TODO Doku anpassen
+
 @group Iron Elements
 @hero hero.svg
 @demo demo/index.html
@@ -125,7 +127,11 @@ and instead put a div inside and style that.
     },
 
     get dimension() {
-      return this.horizontal ? 'width' : 'height';
+       return this.horizontal ? 'width' : 'height';
+    },
+
+    get dimensionStyleProperty() {
+       return this.horizontal ? 'maxWidth' : 'maxHeight';
     },
 
     hostAttributes: {
@@ -162,7 +168,7 @@ and instead put a div inside and style that.
 
     updateSize: function(size, animated) {
       // No change!
-      if (this.style[this.dimension] === size) {
+      if (this.style[this.dimensionStyleProperty] === size) {
         return;
       }
 
@@ -174,11 +180,11 @@ and instead put a div inside and style that.
         // For `auto` we must calculate what is the final size for the animation.
         // After the transition is done, _transitionEnd will set the size back to `auto`.
         if (size === 'auto') {
-          this.style[this.dimension] = size;
+          this.style[this.dimensionStyleProperty] = '';
           size = this._calcSize();
         }
         // Go to startSize without animation.
-        this.style[this.dimension] = startSize;
+        this.style[this.dimensionStyleProperty] = startSize;
         // Force layout to ensure transition will go. Set offsetHeight to itself
         // so that compilers won't remove it.
         this.offsetHeight = this.offsetHeight;
@@ -186,7 +192,11 @@ and instead put a div inside and style that.
         this._updateTransition(true);
       }
       // Set the final size.
-      this.style[this.dimension] = size;
+      if (size === 'auto') {
+          this.style[this.dimensionStyleProperty] = '';
+      } else {
+        this.style[this.dimensionStyleProperty] = size;
+      }
     },
 
     /**
@@ -206,8 +216,8 @@ and instead put a div inside and style that.
     },
 
     _horizontalChanged: function() {
-      this.style.transitionProperty = this.dimension;
-      var otherDimension = this.dimension === 'width' ? 'height' : 'width';
+      this.style.transitionProperty = "max-" + this.dimension;
+      var otherDimension = this.dimension === 'width' ? 'maxHeight' : 'maxWidth';
       this.style[otherDimension] = '';
       this.updateSize(this.opened ? 'auto' : '0px', false);
     },
@@ -231,7 +241,7 @@ and instead put a div inside and style that.
 
     _transitionEnd: function() {
       if (this.opened) {
-        this.style[this.dimension] = 'auto';
+        this.style[this.dimensionStyleProperty] = '';
       }
       this.toggleClass('iron-collapse-closed', !this.opened);
       this.toggleClass('iron-collapse-opened', this.opened);
