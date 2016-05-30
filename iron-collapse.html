@@ -125,15 +125,15 @@ and instead put a div inside and style that.
     },
 
     get dimension() {
-       return this.horizontal ? 'width' : 'height';
+      return this.horizontal ? 'width' : 'height';
     },
 
     get dimensionMax() {
-       return this.horizontal ? 'maxWidth' : 'maxHeight';
+      return this.horizontal ? 'maxWidth' : 'maxHeight';
     },
 
     get dimensionMaxCss() {
-       return this.horizontal ? 'max-width' : 'max-height';
+      return this.horizontal ? 'max-width' : 'max-height';
     },
 
     hostAttributes: {
@@ -195,7 +195,7 @@ and instead put a div inside and style that.
       }
       // Set the final size.
       if (size === 'auto') {
-          this.style[this.dimensionMax] = '';
+        this.style[this.dimensionMax] = '';
       } else {
         this.style[this.dimensionMax] = size;
       }
