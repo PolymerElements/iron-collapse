@@ -52,25 +52,23 @@ and instead put a div inside and style that.
 
 <dom-module id="iron-collapse">
 
-  <style>
-
-    :host {
-      display: block;
-      transition-duration: 300ms;
-      overflow: visible;
-    }
-
-    :host(.iron-collapse-closed) {
-      display: none;
-    }
-
-    :host(:not(.iron-collapse-opened)) {
-      overflow: hidden;
-    }
-
-  </style>
-
   <template>
+
+    <style>
+      :host {
+        display: block;
+        transition-duration: 300ms;
+        overflow: visible;
+      }
+
+      :host(.iron-collapse-closed) {
+        display: none;
+      }
+
+      :host(:not(.iron-collapse-opened)) {
+        overflow: hidden;
+      }
+    </style>
 
     <content></content>
 
