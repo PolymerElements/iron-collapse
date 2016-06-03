@@ -128,11 +128,11 @@ and instead put a div inside and style that.
       return this.horizontal ? 'width' : 'height';
     },
 
-    get dimensionMax() {
+    get _dimensionMax() {
       return this.horizontal ? 'maxWidth' : 'maxHeight';
     },
 
-    get dimensionMaxCss() {
+    get _dimensionMaxCss() {
       return this.horizontal ? 'max-width' : 'max-height';
     },
 
@@ -170,7 +170,7 @@ and instead put a div inside and style that.
 
     updateSize: function(size, animated) {
       // No change!
-      if (this.style[this.dimensionMax] === size) {
+      if (this.style[this._dimensionMax] === size) {
         return;
       }
 
@@ -182,11 +182,11 @@ and instead put a div inside and style that.
         // For `auto` we must calculate what is the final size for the animation.
         // After the transition is done, _transitionEnd will set the size back to `auto`.
         if (size === 'auto') {
-          this.style[this.dimensionMax] = '';
+          this.style[this._dimensionMax] = '';
           size = this._calcSize();
         }
         // Go to startSize without animation.
-        this.style[this.dimensionMax] = startSize;
+        this.style[this._dimensionMax] = startSize;
         // Force layout to ensure transition will go. Set offsetHeight to itself
         // so that compilers won't remove it.
         this.offsetHeight = this.offsetHeight;
@@ -195,9 +195,9 @@ and instead put a div inside and style that.
       }
       // Set the final size.
       if (size === 'auto') {
-        this.style[this.dimensionMax] = '';
+        this.style[this._dimensionMax] = '';
       } else {
-        this.style[this.dimensionMax] = size;
+        this.style[this._dimensionMax] = size;
       }
     },
 
@@ -218,8 +218,8 @@ and instead put a div inside and style that.
     },
 
     _horizontalChanged: function() {
-      this.style.transitionProperty = this.dimensionMaxCss;
-      var otherDimension = this.dimensionMax === 'maxWidth' ? 'maxHeight' : 'maxWidth';
+      this.style.transitionProperty = this._dimensionMaxCss;
+      var otherDimension = this._dimensionMax === 'maxWidth' ? 'maxHeight' : 'maxWidth';
       this.style[otherDimension] = '';
       this.updateSize(this.opened ? 'auto' : '0px', false);
     },
@@ -243,7 +243,7 @@ and instead put a div inside and style that.
 
     _transitionEnd: function() {
       if (this.opened) {
-        this.style[this.dimensionMax] = '';
+        this.style[this._dimensionMax] = '';
       }
       this.toggleClass('iron-collapse-closed', !this.opened);
       this.toggleClass('iron-collapse-opened', this.opened);
