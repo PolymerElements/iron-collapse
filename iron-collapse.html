@@ -128,10 +128,18 @@ and instead put a div inside and style that.
       return this.horizontal ? 'width' : 'height';
     },
 
+    /**
+     * `maxWidth` or `maxHeight`.
+     * @private
+     */    
     get _dimensionMax() {
       return this.horizontal ? 'maxWidth' : 'maxHeight';
     },
 
+    /**
+     * `max-width` or `max-height`.
+     * @private
+     */
     get _dimensionMaxCss() {
       return this.horizontal ? 'max-width' : 'max-height';
     },
@@ -168,9 +176,15 @@ and instead put a div inside and style that.
       this.opened = false;
     },
 
+    /**
+     * Updates the size of the element.
+     * @param {!String} size The new value for `maxWidth`/`maxHeight` as css property value, usually `auto` or `0px`.
+     * @param {boolean=} animated if `true` updates the size with an animation, otherwise without.
+     */     
     updateSize: function(size, animated) {
       // No change!
-      if (this.style[this._dimensionMax] === size) {
+      var curSize = this.style[this._dimensionMax];
+      if (curSize === size || (size === 'auto' && !curSize)) {
         return;
       }
 
