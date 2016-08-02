@@ -216,6 +216,9 @@ Custom property | Description | Default
       // Set the final size.
       if (size === 'auto') {
         this.style[this._dimensionMax] = '';
+      // call _transitionEnd if no transition is performed, styles need to be set
+      } else if (size === startSize) {
+        this._transitionEnd();
       } else {
         this.style[this._dimensionMax] = size;
       }
