@@ -35,6 +35,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </iron-collapse>
       </template>
     </test-fixture>
+	
+	
+	<test-fixture id="test-empty">
+	<template>
+        <iron-collapse id="collapse" opened>
+        </iron-collapse>
+      </template>
+	</test-fixture>
 
     <script>
 
@@ -140,6 +148,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         });
 
       });
+	  
+	  suite('empty', function() {
+
+        var collapse;
+
+        setup(function() {
+		  collapse = fixture('test-empty');
+		  
+        });
+
+        test('empty&opened shows dynamically loaded content', function(done) {
+			flush(function () {
+				collapse.toggle();
+				collapse.toggle();
+				assert.equal(collapse.style.maxHeight, "");
+				done();
+			});
+        });
+		
+		});
 
     </script>
 
