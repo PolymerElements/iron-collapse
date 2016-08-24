@@ -99,9 +99,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           assert.equal(collapse.transitioning, false, 'transitioning is false');
         });
 
-        test('enableTransition(false) disables animations', function() {
-          collapse.enableTransition(false);
-          assert.isTrue(collapse.noAnimation, '`noAnimation` is true');
+        test('noAnimation disables animations', function() {
+          collapse.noAnimation = true;
           // trying to animate the size update
           collapse.updateSize('0px', true);
           // Animation immediately disabled.

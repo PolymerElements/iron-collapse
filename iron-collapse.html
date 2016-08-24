@@ -79,6 +79,7 @@ Custom property | Description | Default
     </style>
 
     <content></content>
+    <slot></slot>
 
   </template>
 
@@ -211,6 +212,11 @@ Custom property | Description | Default
 
       this._desiredSize = size;
 
+      // Set the stored desired size after the element is attached.
+      if (!this.isAttached) {
+        return;
+      }
+
       this._updateTransition(false);
       // If we can animate, must do some prep work.
       if (willAnimate) {
@@ -238,18 +244,6 @@ Custom property | Description | Default
       if (!willAnimate) {
         this._transitionEnd();
       }
-    },
-
-    /**
-     * enableTransition() is deprecated, but left over so it doesn't break existing code.
-     * Please use `noAnimation` property instead.
-     *
-     * @method enableTransition
-     * @deprecated since version 1.0.4
-     */
-    enableTransition: function(enabled) {
-      Polymer.Base._warn('`enableTransition()` is deprecated, use `noAnimation` instead.');
-      this.noAnimation = !enabled;
     },
 
     _updateTransition: function(enabled) {
