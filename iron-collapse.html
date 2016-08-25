@@ -245,6 +245,18 @@ Custom property | Description | Default
         this._transitionEnd();
       }
     },
+    
+    /**
+     * enableTransition() is deprecated, but left over so it doesn't break existing code.
+     * Please use `noAnimation` property instead.
+     *
+     * @method enableTransition
+     * @deprecated since version 1.0.4
+     */
+    enableTransition: function(enabled) {
+      Polymer.Base._warn('`enableTransition()` is deprecated, use `noAnimation` instead.');
+      this.noAnimation = !enabled;
+    },
 
     _updateTransition: function(enabled) {
       this.style.transitionDuration = (enabled && !this.noAnimation) ? '' : '0s';
