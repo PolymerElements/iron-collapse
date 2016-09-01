@@ -212,11 +212,6 @@ Custom property | Description | Default
 
       this._desiredSize = size;
 
-      // Set the stored desired size after the element is attached.
-      if (!this.isAttached) {
-        return;
-      }
-
       this._updateTransition(false);
       // If we can animate, must do some prep work.
       if (willAnimate) {
@@ -245,7 +240,7 @@ Custom property | Description | Default
         this._transitionEnd();
       }
     },
-    
+
     /**
      * enableTransition() is deprecated, but left over so it doesn't break existing code.
      * Please use `noAnimation` property instead.
