@@ -19,23 +19,23 @@
   "homepage": "https://github.com/PolymerElements/iron-collapse",
   "ignore": [],
   "dependencies": {
-    "iron-resizable-behavior": "https://github.com/notwaldorf/iron-resizable-behavior.git#2.0-preview",
-    "polymer": "https://github.com/PolymerLabs/alacarte.git#master"
+    "iron-resizable-behavior": "PolymerElements/iron-resizable-behavior#2.0-preview",
+    "polymer": "Polymer/polymer#2.0-preview"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
-    "paper-styles": "https://github.com/notwaldorf/paper-styles.git#2.0-preview",
-    "iron-demo-helpers": "https://github.com/notwaldorf/iron-demo-helpers.git#2.0-preview",
+    "paper-styles": "PolymerElements/paper-styles#2.0-preview",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#2.0-preview",
     "test-fixture": "PolymerElements/test-fixture#custom-elements-v1",
     "web-component-tester": "^4.0.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#v1-polymer-edits"
+    "webcomponentsjs": "webcomponents/webcomponentsjs#v1"
   },
   "main": "iron-collapse.html",
   "resolutions": {
     "paper-styles": "2.0-preview",
-    "polymer": "master",
+    "polymer": "2.0-preview",
     "test-fixture": "custom-elements-v1",
-    "webcomponentsjs": "v1-polymer-edits",
-    "iron-flex-layout": "2.0-preview"
+    "iron-flex-layout": "2.0-preview",
+    "webcomponentsjs": "v1"
   }
 }
