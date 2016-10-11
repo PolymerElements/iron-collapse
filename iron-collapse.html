@@ -165,7 +165,7 @@ Custom property | Description | Default
     },
 
     listeners: {
-      transitionend: '_transitionEnd'
+      transitionend: '_onTransitionEnd'
     },
 
     attached: function() {
@@ -278,6 +278,12 @@ Custom property | Description | Default
       this.toggleClass('iron-collapse-opened', this.opened);
       this._updateTransition(false);
       this.notifyResize();
+    },
+
+    _onTransitionEnd: function(event) {
+      if (Polymer.dom(event).rootTarget === this) {
+        this._transitionEnd();
+      }
     },
 
     /**
