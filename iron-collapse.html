@@ -206,7 +206,8 @@ Custom property | Description | Default
       // Consider 'auto' as '', to take full size.
       size = size === 'auto' ? '' : size;
 
-      var willAnimate = animated && !this.noAnimation && this.isAttached && this._desiredSize !== size;
+      var willAnimate = animated && !this.noAnimation &&
+                        this.isAttached && this._desiredSize !== size;
 
       this._desiredSize = size;
 
