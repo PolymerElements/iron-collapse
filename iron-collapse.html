@@ -120,6 +120,18 @@ Custom property | Description | Default
       },
 
       /**
+       * When true, the element is transitioning its opened state. When false,
+       * the element has finished opening/closing.
+       *
+       * @attribute transitioning
+       */
+      transitioning: {
+        type: Boolean,
+        notify: true,
+        readOnly: true
+      },
+
+      /**
        * Set noAnimation to true to disable animations.
        *
        * @attribute noAnimation
@@ -254,6 +266,7 @@ Custom property | Description | Default
       this.setAttribute('aria-expanded', this.opened);
       this.setAttribute('aria-hidden', !this.opened);
 
+      this._setTransitioning(true);
       this.toggleClass('iron-collapse-closed', false);
       this.toggleClass('iron-collapse-opened', false);
       this.updateSize(this.opened ? 'auto' : '0px', true);
@@ -270,6 +283,7 @@ Custom property | Description | Default
       this.toggleClass('iron-collapse-opened', this.opened);
       this._updateTransition(false);
       this.notifyResize();
+      this._setTransitioning(false);
     },
 
     _onTransitionEnd: function(event) {
