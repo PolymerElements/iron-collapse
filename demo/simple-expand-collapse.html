@@ -16,7 +16,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template>
 
     <style>
-    
+
       :host {
         display: block;
       }
@@ -50,7 +50,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
     <button id="trigger" on-click="toggle" aria-expanded$="[[opened]]" aria-controls="collapse">[[_getText(opened)]]</button>
     <iron-collapse id="collapse" opened="{{opened}}" horizontal="[[horizontal]]" no-animation="[[noAnimation]]" tabindex="0">
-      <content></content>
       <slot></slot>
     </iron-collapse>
 
