@@ -40,6 +40,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         var collapse;
 
         setup(function () {
+          // Force focus on body at every test.
+          document.body.focus();
           collapse = fixture('trivialCollapse');
         });
 
