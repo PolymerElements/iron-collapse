@@ -42,10 +42,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         border-top: none;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
-        /* TODO(valdrin): Replace with @apply --shadow-elevation-2dp when @apply works. */
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-                    0 1px 5px 0 rgba(0, 0, 0, 0.12),
-                    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        @apply --shadow-elevation-2dp;
       }
     </style>
     <button id="trigger" on-click="toggle" aria-expanded$="[[opened]]" aria-controls="collapse">[[_getText(opened)]]</button>
