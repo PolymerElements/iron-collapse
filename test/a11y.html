@@ -19,7 +19,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
 
-    <link rel="import" href="../iron-collapse.html">
+    <script type="module" src="../iron-collapse.js"></script>
 
   </head>
   <body>
@@ -34,40 +34,40 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </template>
     </test-fixture>
 
-    <script>
+    <script type="module">
+import '../iron-collapse.js';
 
-      suite('a11y', function() {
-        var collapse;
+suite('a11y', function() {
+  var collapse;
 
-        setup(function () {
-          // Force focus on body at every test.
-          document.body.focus();
-          collapse = fixture('trivialCollapse');
-        });
+  setup(function () {
+    // Force focus on body at every test.
+    document.body.focus();
+    collapse = fixture('trivialCollapse');
+  });
 
-        test('aria attributes', function() {
-          assert.equal(collapse.getAttribute('role'), 'group');
-          assert.equal(collapse.getAttribute('aria-expanded'), 'false');
-          assert.equal(collapse.getAttribute('aria-hidden'), 'true');
-        });
+  test('aria attributes', function() {
+    assert.equal(collapse.getAttribute('role'), 'group');
+    assert.equal(collapse.getAttribute('aria-expanded'), 'false');
+    assert.equal(collapse.getAttribute('aria-hidden'), 'true');
+  });
 
-        test('set opened to true', function() {
-          collapse.opened = true;
-          assert.equal(collapse.getAttribute('aria-expanded'), 'true');
-          assert.equal(collapse.getAttribute('aria-hidden'), 'false');
-        });
+  test('set opened to true', function() {
+    collapse.opened = true;
+    assert.equal(collapse.getAttribute('aria-expanded'), 'true');
+    assert.equal(collapse.getAttribute('aria-hidden'), 'false');
+  });
 
-        test('focus the collapse when opened', function() {
-          assert.notEqual(document.activeElement, collapse);
-          collapse.opened = true;
-          assert.equal(document.activeElement, collapse);
-        });
+  test('focus the collapse when opened', function() {
+    assert.notEqual(document.activeElement, collapse);
+    collapse.opened = true;
+    assert.equal(document.activeElement, collapse);
+  });
 
-        a11ySuite('trivialCollapse');
+  a11ySuite('trivialCollapse');
 
-      });
-
-    </script>
+});
+</script>
 
   </body>
 </html>
