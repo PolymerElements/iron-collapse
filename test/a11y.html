@@ -51,7 +51,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           // aria-expanded should only be set on the button that
           // controls the collapsable area, not on the area itself.
           // See https://www.w3.org/WAI/GL/wiki/Using_aria-expanded_to_indicate_the_state_of_a_collapsible_element#Description
-          assert.isNotOk(collapse.getAttribute('aria-expanded'));
+          assert.isFalse(collapse.hasAttribute('aria-expanded'));
         });
 
         test('set opened to true', function() {
