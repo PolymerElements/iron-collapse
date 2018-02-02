@@ -1,0 +1,10 @@
+{
+  "name": "@polymer/iron-collapse",
+  "private": true,
+  "description": "Provides a collapsable container",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PolymerElements/iron-collapse"
+  },
+  "license": "http://polymer.github.io/LICENSE.txt"
+}
