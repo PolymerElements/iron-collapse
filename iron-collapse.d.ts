@@ -75,14 +75,14 @@ interface IronCollapseElement extends Polymer.Element, Polymer.IronResizableBeha
    */
   noAnimation: boolean|null|undefined;
   hostAttributes: object|null;
-  dimension: object|null;
+  readonly dimension: any;
 
   /**
    * Toggle the opened state.
    */
-  toggle(): any;
-  show(): any;
-  hide(): any;
+  toggle(): void;
+  show(): void;
+  hide(): void;
 
   /**
    * Updates the size of the element.
@@ -90,18 +90,18 @@ interface IronCollapseElement extends Polymer.Element, Polymer.IronResizableBeha
    * @param size The new value for `maxWidth`/`maxHeight` as css property value, usually `auto` or `0px`.
    * @param animated if `true` updates the size with an animation, otherwise without.
    */
-  updateSize(size: string, animated?: boolean): any;
+  updateSize(size: string, animated?: boolean): void;
 
   /**
    * enableTransition() is deprecated, but left over so it doesn't break existing code.
    * Please use `noAnimation` property instead.
    */
-  enableTransition(enabled: any): any;
-  _updateTransition(enabled: any): any;
-  _horizontalChanged(): any;
-  _openedChanged(): any;
-  _transitionEnd(): any;
-  _onTransitionEnd(event: any): any;
+  enableTransition(enabled: any): void;
+  _updateTransition(enabled: any): void;
+  _horizontalChanged(): void;
+  _openedChanged(): void;
+  _transitionEnd(): void;
+  _onTransitionEnd(event: any): void;
   _calcSize(): any;
 }
 
