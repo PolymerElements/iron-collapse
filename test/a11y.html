@@ -16,10 +16,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="../../web-component-tester/browser.js"></script>
+    <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../../../wct-browser-legacy/browser.js"></script>
 
-    <link rel="import" href="../iron-collapse.html">
+    <script type="module" src="../iron-collapse.js"></script>
 
   </head>
   <body>
@@ -34,40 +34,42 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </template>
     </test-fixture>
 
-    <script>
-      suite('a11y', function() {
-        var collapse;
+    <script type="module">
+import '../iron-collapse.js';
+import { a11ySuite } from 'wct-browser-legacy/a11ySuite.js';
+suite('a11y', function() {
+  var collapse;
 
-        setup(function() {
-          // Force focus on body at every test.
-          document.body.focus();
-          collapse = fixture('trivialCollapse');
-        });
+  setup(function() {
+    // Force focus on body at every test.
+    document.body.focus();
+    collapse = fixture('trivialCollapse');
+  });
 
-        test('aria attributes', function() {
-          assert.equal(collapse.getAttribute('role'), 'group');
-          assert.equal(collapse.getAttribute('aria-hidden'), 'true');
-          // aria-expanded should only be set on the button that
-          // controls the collapsable area, not on the area itself.
-          // See
-          // https://www.w3.org/WAI/GL/wiki/Using_aria-expanded_to_indicate_the_state_of_a_collapsible_element#Description
-          assert.isFalse(collapse.hasAttribute('aria-expanded'));
-        });
+  test('aria attributes', function() {
+    assert.equal(collapse.getAttribute('role'), 'group');
+    assert.equal(collapse.getAttribute('aria-hidden'), 'true');
+    // aria-expanded should only be set on the button that
+    // controls the collapsable area, not on the area itself.
+    // See
+    // https://www.w3.org/WAI/GL/wiki/Using_aria-expanded_to_indicate_the_state_of_a_collapsible_element#Description
+    assert.isFalse(collapse.hasAttribute('aria-expanded'));
+  });
 
-        test('set opened to true', function() {
-          collapse.opened = true;
-          assert.equal(collapse.getAttribute('aria-hidden'), 'false');
-        });
+  test('set opened to true', function() {
+    collapse.opened = true;
+    assert.equal(collapse.getAttribute('aria-hidden'), 'false');
+  });
 
-        test('focus the collapse when opened', function() {
-          assert.notEqual(document.activeElement, collapse);
-          collapse.opened = true;
-          assert.equal(document.activeElement, collapse);
-        });
+  test('focus the collapse when opened', function() {
+    assert.notEqual(document.activeElement, collapse);
+    collapse.opened = true;
+    assert.equal(document.activeElement, collapse);
+  });
 
-        a11ySuite('trivialCollapse');
-      });
-    </script>
+  a11ySuite('trivialCollapse');
+});
+</script>
 
   </body>
 </html>
