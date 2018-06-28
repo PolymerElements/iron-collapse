@@ -11,153 +11,131 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <html>
   <head>
-
     <title>iron-collapse-flex</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-    <script src="../../../wct-browser-legacy/browser.js"></script>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../node_modules/wct-browser-legacy/browser.js"></script>
 
-    <script type="module" src="../../iron-flex-layout/iron-flex-layout-classes.js"></script>
-    <script type="module" src="../iron-collapse.js"></script>
-
-    <!-- FIXME(polymer-modulizer):
-        These imperative modules that innerHTML your HTML are
-        a hacky way to be sure that any mixins in included style
-        modules are ready before any elements that reference them are
-        instantiated, otherwise the CSS @apply mixin polyfill won't be
-        able to expand the underlying CSS custom properties.
-        See: https://github.com/Polymer/polymer-modulizer/issues/154
-        -->
-    <script type="module">
-const $_documentContainer = document.createElement('template');
-$_documentContainer.innerHTML = `<custom-style><style is="custom-style" include="iron-flex"></style></custom-style>`;
-document.body.appendChild($_documentContainer.content);
-</script>
+    <custom-style><style is="custom-style" include="iron-flex"></style></custom-style>
   </head>
   <body>
 
-    <script type="module">
-const $_documentContainer = document.createElement('template');
-
-$_documentContainer.innerHTML = `<test-fixture id="test">
+    <test-fixture id="test">
       <template>
         <div id="container" class="layout vertical" style="height: 200px">
-          <iron-collapse id="collapse" opened="" style="flex: 1 0 auto">
+          <iron-collapse id="collapse" opened style="flex: 1 0 auto">
             <div style="height:100px;">
               Lorem ipsum
             </div>
           </iron-collapse>
         </div>
       </template>
-    </test-fixture>`;
-
-document.body.appendChild($_documentContainer.content);
-</script>
+    </test-fixture>
 
     <script type="module">
-import '@polymer/iron-flex-layout/iron-flex-layout-classes.js';
-import '../iron-collapse.js';
-suite('flex', function() {
-  var container;
-  var collapse;
-  var collapseHeight;
+      import '@polymer/iron-flex-layout/iron-flex-layout-classes.js';
+      import '../iron-collapse.js';
+      suite('flex', function() {
+        var container;
+        var collapse;
+        var collapseHeight;
 
-  setup(function() {
-    container = fixture('test');
-    collapse = container.querySelector('iron-collapse');
-    collapseHeight = getComputedStyle(collapse).height;
-  });
+        setup(function() {
+          container = fixture('test');
+          collapse = container.querySelector('iron-collapse');
+          collapseHeight = getComputedStyle(collapse).height;
+        });
 
-  test('default opened height', function() {
-    assert.equal(collapse.style.height, '');
-  });
+        test('default opened height', function() {
+          assert.equal(collapse.style.height, '');
+        });
 
-  test('set opened to false triggers animation', function(done) {
-    collapse.opened = false;
-    // Animation got enabled.
-    assert.notEqual(collapse.style.transitionDuration, '0s');
-    collapse.addEventListener('transitionend', function() {
-      // Animation disabled.
-      assert.equal(collapse.style.transitionDuration, '0s');
-      done();
-    });
-  });
+        test('set opened to false triggers animation', function(done) {
+          collapse.opened = false;
+          // Animation got enabled.
+          assert.notEqual(collapse.style.transitionDuration, '0s');
+          collapse.addEventListener('transitionend', function() {
+            // Animation disabled.
+            assert.equal(collapse.style.transitionDuration, '0s');
+            done();
+          });
+        });
 
-  test('noAnimation disables animations', function() {
-    collapse.noAnimation = true;
-    // trying to animate the size update
-    collapse.updateSize('0px', true);
-    // Animation immediately disabled.
-    assert.equal(collapse.style.maxHeight, '0px');
-  });
+        test('noAnimation disables animations', function() {
+          collapse.noAnimation = true;
+          // trying to animate the size update
+          collapse.updateSize('0px', true);
+          // Animation immediately disabled.
+          assert.equal(collapse.style.maxHeight, '0px');
+        });
 
-  test('set opened to false, then to true', function(done) {
-    // this listener will be triggered twice (every time `opened` changes)
-    collapse.addEventListener('transitionend', function() {
-      if (collapse.opened) {
-        // Check finalSize after animation is done.
-        assert.equal(collapse.style.maxHeight, '');
-        done();
-      } else {
-        // Check if size is still 0px.
-        assert.equal(collapse.style.maxHeight, '0px');
-        // Trigger 2nd toggle.
-        collapse.opened = true;
-        // Size should be immediately set.
-        assert.equal(collapse.style.maxHeight, collapseHeight);
-      }
-    });
-    // Trigger 1st toggle.
-    collapse.opened = false;
-    // Size should be immediately set.
-    assert.equal(collapse.style.maxHeight, '0px');
-  });
+        test('set opened to false, then to true', function(done) {
+          // this listener will be triggered twice (every time `opened` changes)
+          collapse.addEventListener('transitionend', function() {
+            if (collapse.opened) {
+              // Check finalSize after animation is done.
+              assert.equal(collapse.style.maxHeight, '');
+              done();
+            } else {
+              // Check if size is still 0px.
+              assert.equal(collapse.style.maxHeight, '0px');
+              // Trigger 2nd toggle.
+              collapse.opened = true;
+              // Size should be immediately set.
+              assert.equal(collapse.style.maxHeight, collapseHeight);
+            }
+          });
+          // Trigger 1st toggle.
+          collapse.opened = false;
+          // Size should be immediately set.
+          assert.equal(collapse.style.maxHeight, '0px');
+        });
 
-  test('opened changes trigger iron-resize', function() {
-    var spy = sinon.stub();
-    collapse.addEventListener('iron-resize', spy);
-    // No animations for faster test.
-    collapse.noAnimation = true;
-    collapse.opened = false;
-    assert.isTrue(spy.calledOnce, 'iron-resize was fired');
-  });
+        test('opened changes trigger iron-resize', function() {
+          var spy = sinon.stub();
+          collapse.addEventListener('iron-resize', spy);
+          // No animations for faster test.
+          collapse.noAnimation = true;
+          collapse.opened = false;
+          assert.isTrue(spy.calledOnce, 'iron-resize was fired');
+        });
 
-  test('overflow is hidden while animating', function(done) {
-    collapse.addEventListener('transitionend', function() {
-      // Should still be hidden.
-      assert.equal(getComputedStyle(collapse).overflow, 'hidden');
-      done();
-    });
-    assert.equal(getComputedStyle(collapse).overflow, 'visible');
-    collapse.opened = false;
-    // Immediately updated style.
-    assert.equal(getComputedStyle(collapse).overflow, 'hidden');
-  });
+        test('overflow is hidden while animating', function(done) {
+          collapse.addEventListener('transitionend', function() {
+            // Should still be hidden.
+            assert.equal(getComputedStyle(collapse).overflow, 'hidden');
+            done();
+          });
+          assert.equal(getComputedStyle(collapse).overflow, 'visible');
+          collapse.opened = false;
+          // Immediately updated style.
+          assert.equal(getComputedStyle(collapse).overflow, 'hidden');
+        });
 
-  test('toggle horizontal updates size', function() {
-    collapse.horizontal = false;
-    assert.equal(collapse.style.width, '');
-    assert.equal(collapse.style.maxHeight, '');
-    assert.equal(collapse.style.transitionProperty, 'max-height');
+        test('toggle horizontal updates size', function() {
+          collapse.horizontal = false;
+          assert.equal(collapse.style.width, '');
+          assert.equal(collapse.style.maxHeight, '');
+          assert.equal(collapse.style.transitionProperty, 'max-height');
 
-    collapse.horizontal = true;
-    assert.equal(collapse.style.maxWidth, '');
-    assert.equal(collapse.style.height, '');
-    assert.equal(collapse.style.transitionProperty, 'max-width');
-  });
+          collapse.horizontal = true;
+          assert.equal(collapse.style.maxWidth, '');
+          assert.equal(collapse.style.height, '');
+          assert.equal(collapse.style.transitionProperty, 'max-width');
+        });
 
-  test('change size with updateSize', function(done) {
-    collapse.addEventListener('transitionend', function() {
-      // size should be kept after transition
-      assert.equal(collapse.style.maxHeight, '123px');
-      done();
-    });
-    collapse.updateSize('123px', true);
-  });
-});
-</script>
+        test('change size with updateSize', function(done) {
+          collapse.addEventListener('transitionend', function() {
+            // size should be kept after transition
+            assert.equal(collapse.style.maxHeight, '123px');
+            done();
+          });
+          collapse.updateSize('123px', true);
+        });
+      });
+    </script>
 
   </body>
 </html>
