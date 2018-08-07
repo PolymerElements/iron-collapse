@@ -10,7 +10,7 @@ env:
   global:
     - secure: FGC4cfcd62eFsXRUmI/She0TY/rbiwtLaZb6lsFpQ1TC/P1yKMgVTL6PIeE4T/eMijDlAbCdtMMNIbj5vOSzUsdHbB0OHJghY7JQ27JdnRKQRUxPErLG35Md118qF7aG55f6mfeZaVYCMFQFWyZzFrbQ5JG1TDJ8rSkxxpOW0L4=
     - secure: s+J9ZqHKwkwcELs+e+VaTsHFY3V5o8OFVqDZ+3dpxFus3mVmOeQvgqumF+SJ69iKut1VUrUU4UYENZZk/IbE3K3mreYYD7OjQqozwQpEdUsfQ6R6wD1HfyDEcoKHfMJqJyusgD27vmtaz30cdFxGaX1Y/GjtyJCCKo1ZnlG51Ek=
-node_js: '9'
+node_js: 'node'
 addons:
   firefox: latest
   chrome: stable
