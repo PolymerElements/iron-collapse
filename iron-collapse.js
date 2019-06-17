@@ -55,12 +55,11 @@ Custom property | Description | Default
 ----------------|-------------|----------
 `--iron-collapse-transition-duration` | Animation transition duration | `300ms`
 
-@group Iron Elements
-@hero hero.svg
 @demo demo/index.html
 @element iron-collapse
 */
 Polymer({
+  /** @override */
   _template: html`
     <style>
       :host {
@@ -90,15 +89,11 @@ Polymer({
 
     /**
      * If true, the orientation is horizontal; otherwise is vertical.
-     *
-     * @attribute horizontal
      */
     horizontal: {type: Boolean, value: false, observer: '_horizontalChanged'},
 
     /**
      * Set opened to true to show the collapse element and to false to hide it.
-     *
-     * @attribute opened
      */
     opened:
         {type: Boolean, value: false, notify: true, observer: '_openedChanged'},
@@ -106,15 +101,11 @@ Polymer({
     /**
      * When true, the element is transitioning its opened state. When false,
      * the element has finished opening/closing.
-     *
-     * @attribute transitioning
      */
     transitioning: {type: Boolean, notify: true, readOnly: true},
 
     /**
      * Set noAnimation to true to disable animations.
-     *
-     * @attribute noAnimation
      */
     noAnimation: {type: Boolean},
 
